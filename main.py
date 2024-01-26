@@ -9,6 +9,18 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
+from toml import load  # Importez la bibliothèque toml pour lire le fichier de secrets
+
+# Importez la configuration API Gemini à partir du fichier de secrets
+secret_file = st.secrets["secrets.toml"]
+with open(secret_file) as f:
+    config = load(f)
+    gemini_api_key = config["gemini"]["api_key"]
+
+# Configurez l'API Gemini avec la clé API
+genai.configure(api_key=gemini_api_key)
+
+# ... (reste de votre code)
 
 load_dotenv()
 os.getenv("GOOGLE_API_KEY")
@@ -38,7 +50,8 @@ def get_vector_store(text_chunks):
 
 def get_conversational_chain():
     prompt_template = """
-    Answer the question as detailed as possible from the provided context, make sure to provide all the details, if the answer is not in
+    Answer the question as detailed as possible from the provided context, make sure to provide all the details, 
+    if the answer is not in
     provided context just say, "answer is not available in the context", don't provide the wrong answer\n\n
     Context:\n {context}?\n
     Question: \n{question}\n
@@ -46,7 +59,7 @@ def get_conversational_chain():
     Answer:
     """
 
-    model = ChatGoogleGenerativeAI(model="gemini-pro",
+    model = ChatGoogleGenerativeAI(model="Gemini-pro",
                                    temperature=0.3)
 
     prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
