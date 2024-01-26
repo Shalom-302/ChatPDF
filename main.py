@@ -61,20 +61,25 @@ def get_conversational_chain():
 
 
 def user_input(user_question):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=gemini_api_key)
+  embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=gemini_api_key)
 
+  # Chargez l'index FAISS existant
+  try:
     new_db = FAISS.load_local("faiss_index", embeddings)
-    docs = new_db.similarity_search(user_question)
+  except RuntimeError as e:
+    st.error(e)
+    return
 
-    chain = get_conversational_chain()
+  docs = new_db.similarity_search(user_question)
 
-    response = chain(
-        {"input_documents": docs, "question": user_question}
-    )
+  chain = get_conversational_chain()
 
-    print(response)
-    st.write("Reply: ", response["output_text"])
+  response = chain(
+    {"input_documents": docs, "question": user_question}
+  )
 
+  print(response)
+  st.write("Reply: ", response["output_text"])
 
 def main():
     st.set_page_config("Chat PDF")
