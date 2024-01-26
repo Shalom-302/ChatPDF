@@ -37,7 +37,13 @@ def get_text_chunks(text):
 def get_vector_store(text_chunks):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=gemini_api_key)
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
-    return vector_store
+
+    # Création de l'index FAISS dans le stockage interne
+    index = faiss.create_index(vector_store.get_embedding_dim(), faiss.METRIC_L2)
+    index.train(vector_store)
+    index.save("/streamlit/static/index.faiss")
+
+    return index
 
 
 def get_conversational_chain():
@@ -61,14 +67,14 @@ def get_conversational_chain():
 
 
 def user_input(user_question):
-  embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=gemini_api_key)
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=gemini_api_key)
 
-  # Chargez l'index FAISS existant
-  try:
-    new_db = FAISS.load_local("faiss_index", embeddings)
-  except RuntimeError as e:
-    st.error(e)
-    return
+    # Chargez l'index FAISS depuis le stockage interne
+    try:
+        new_db = FAISS.load_local("/streamlit/static/index.faiss", embeddings)
+    except RuntimeError as e:
+        st.error(e)
+        return
 
   docs = new_db.similarity_search(user_question)
 
