@@ -76,7 +76,7 @@ def user_input(user_question):
         st.error(e)
         return
 
-  docs = new_db.similarity_search(user_question)
+      docs = new_db.similarity_search(user_question)
 
   chain = get_conversational_chain()
 
