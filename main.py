@@ -21,7 +21,9 @@ genai.configure(api_key=gemini_api_key)
 
 # ... (reste de votre code)
 
-
+load_dotenv()
+os.getenv("GOOGLE_API_KEY")
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 def get_pdf_text(pdf_docs):
