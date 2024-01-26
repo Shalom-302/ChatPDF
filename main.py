@@ -8,7 +8,6 @@ from langchain_community.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
-from dotenv import load_dotenv
 from toml import load  # Importez la bibliothèque toml pour lire le fichier de secrets
 
 # Importez la configuration API Gemini à partir du fichier de secrets
@@ -21,10 +20,6 @@ with open(secret_file) as f:
 genai.configure(api_key=gemini_api_key)
 
 # ... (reste de votre code)
-
-load_dotenv()
-os.getenv("GOOGLE_API_KEY")
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 def get_pdf_text(pdf_docs):
