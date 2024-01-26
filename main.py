@@ -70,22 +70,21 @@ def user_input(user_question):
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=gemini_api_key)
 
     # Chargez l'index FAISS depuis le stockage interne
-    try:
+        try:
         new_db = FAISS.load_local("/streamlit/static/index.faiss", embeddings)
-    except RuntimeError as e:
+        except RuntimeError as e:
         st.error(e)
         return
+    docs = new_db.similarity_search(user_question)
 
-  docs = new_db.similarity_search(user_question)
+    chain = get_conversational_chain()
 
-  chain = get_conversational_chain()
-
-  response = chain(
+    response = chain(
     {"input_documents": docs, "question": user_question}
   )
 
-  print(response)
-  st.write("Reply: ", response["output_text"])
+    print(response)
+    st.write("Reply: ", response["output_text"])
 
 def main():
     st.set_page_config("Chat PDF")
