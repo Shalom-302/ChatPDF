@@ -1,8 +1,8 @@
-streamlit~=1.30.0
-google-generativeai
-python-dotenv~=1.0.0
-langchain~=0.1.2
-pypdf2==2.0.0
-chromadb
-faiss-cpu
 langchain_google_genai
+streamlit
+PyPDF2
+langchain
+faiss-cpu
+python-dotenv
+langchain-community
+google-generativeai

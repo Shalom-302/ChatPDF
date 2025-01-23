@@ -1,0 +1,66 @@
+# Fichiers et répertoires ignorés par défaut
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environnements virtuels
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Fichiers de configuration sensible
+.env
+.secrets
+*.key
+*.pem
+*.crt
+*.cer
+
+# Fichiers de cache et logs
+*.log
+*.sqlite
+*.db
+*.cache
+*.pot
+*.pyc
+*.pyo
+*.pyd
+
+# Fichiers spécifiques à l'IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# Fichiers spécifiques à Streamlit
+.streamlit/
+
+# Fichiers spécifiques à FAISS
+faiss_index/
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*~
