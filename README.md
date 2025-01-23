@@ -23,10 +23,10 @@ Pour exécuter ce projet, vous devez avoir les éléments suivants :
 
 Pour installer ce projet, suivez ces étapes :
 
-- Clonez le dépôt sur votre machine locale avec la commande `git clone https://github.com/<username>/chatbot-pdf.git`
-- Accédez au dossier du projet avec la commande `cd chatbot-pdf`
+- Clonez le dépôt sur votre machine locale avec la commande `git clone https://github.com/Shalom-302/ChatPDF.git`
+- Accédez au dossier du projet avec la commande `cd ChatPDF`
 - Installez les dépendances avec la commande `pip install -r requirements.txt`
-- Créez un fichier `.streamlit/secrets.toml` et stockez votre clé API de Gemini sous la forme `GEMINI_API_KEY = "votre-clé-API"`
+- Créez un fichier `.env` et stockez votre clé API de Gemini sous la forme `GOOGLE_API_KEY = "votre-clé-API"`
 - Lancez l'application avec la commande `streamlit run main.py`
 
 ## Utilisation
